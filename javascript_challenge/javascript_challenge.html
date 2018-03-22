@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Challenge</title>
+
+    <meta name="description" content="JavaScript Challenge: Umuzi Bootcamp">
+    <meta name="author" content="Sydney Sedibe@Umuzi Academy">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        div {
+            margin-top: 10px;
+        }
+
+        .arrow-up {
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+
+          border-bottom: 5px solid black;
+        }
+
+        .arrow-down {
+          width: 0;
+          height: 0;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+
+          border-top: 20px solid #f00;
+        }
+
+        .arrow-right {
+          width: 0;
+          height: 0;
+          border-top: 60px solid transparent;
+          border-bottom: 60px solid transparent;
+
+          border-left: 60px solid green;
+        }
+
+        .arrow-left {
+          width: 0;
+          height: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+
+          border-right:10px solid blue;
+        }
+        b {
+            color: blue;
+        }
+    </style>
+    <script>
+        function challenge1()
+        {
+            // Determine the result...
+            var result = ($("#num1").val() == 75) || ($("#num2").val() == 75) || (parseFloat($("#num1").val()) + parseFloat($("#num2").val()) == 75);
+            var reason = "";
+            // Determine why the result is so...
+            if (result == true)
+            {
+                if ($("#num1").val() == 75)
+                {
+                    reason += " because #1 = 75";
+                }
+                else if ($("#num2").val() == 75)
+                {
+                    reason += " because #2 = 75";
+                }
+                else if (parseFloat($("#num1").val()) + parseFloat($("#num2").val()) == 75)
+                {
+                    reason += " because #1 + #2 = 75";
+                }
+            }
+            else
+            {
+                reason += "because neither #1 nor #2 is 75, and #1 plus #2 is not equal to 75";
+            }
+            // Outpout to console and html...
+            console.log("The condition is "+result+reason);
+            $("#c1-Result").html("The condition is "+result+reason);
+        }
+
+        function challenge2()
+        {
+            console.log(">>>>>>>>>>>>>>> Challenge 2 Output Begin <<<<<<<<<<<<<<<");
+            // Output the area of a triangle with side lengths of 6, 7 and 8...
+            console.log("A triangle with sides of lengths 6, 7 and 8 has an area of "+triangleArea(6, 7, 8)+".");
+            var divOutput = "A triangle with sides of lengths <b>6</b>, <b>7</b> and <b>8</b> has an area of <b>"+triangleArea(6, 7, 8)+"</b>.<br>";
+            $("#c2-Result").html(divOutput);
+
+            // Determine if there's input for all three textboxes, otherwise terminate execution
+            if ($("#sideA").val() == "" && $("#sideB").val() == "" && $("#sideC").val() == "")
+            {
+                console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+                $("#c2-Result").append("<br>No further input was given.")
+                return;
+            }
+
+            // Determine if all three inputs are valid numbers, otherwise display error message
+            // and terminate execution
+            if (isNaN($("#sideA").val()) || isNaN($("#sideB").val()) || isNaN($("#sideC").val()))
+            {
+                if (isNaN($("#sideA").val()))
+                {
+                    $("#c2-Result").append("<br><b>"+$("#sideA").val()+"</b> is not a number.");
+                    console.log("<b>"+$("#sideA").val()+" is not a number");
+                    console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+                    return;
+                }
+                if (isNaN($("#sideB").val()))
+                {
+                    $("#c2-Result").append("<br><b>"+$("#sideB").val()+"</b> is not a number.");
+                    console.log($("#sideB").val()+" is not a number.");
+                    console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+                    return;
+                }
+                if (isNaN($("#sideC").val()))
+                {
+                    $("#c2-Result").append("<br><b>"+$("#sideC").val()+"</b> is not a number.");
+                    console.log($("#sideC").val()+" is not a valid number.");
+                    console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+                    return;
+                }
+            }
+
+            // Display a message that all three lengths need to be provided if one or two are missing
+            if ($("#sideA").val() == "" || ($("#sideB").val() == "" || $("#sideC").val() == ""))
+            {
+                if ($("#sideA").val() == "" && ($("#sideB").val() != "" || $("#sideC").val() != ""))
+                {
+                    $("#c2-Result").append("<br>Length for <b>Side A</b> is missing...");
+                    console.log("Length for Side A is missing...");
+                    console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+                    return;
+                }
+                if ($("#sideB").val() == "" && ($("#sideA").val() != "" || $("#sideC").val() != ""))
+                {
+                    $("#c2-Result").append("<br>Length for <b>Side B</b> is missing...");
+                    console.log("Length for Side B is missing...");
+                    console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+                    return;
+                }
+                if ($("#sideC").val() == "" && ($("#sideA").val() != "" || $("#sideB").val() != ""))
+                {
+                    $("#c2-Result").append("<br>Length for <b>Side C</b> is missing...");
+                    console.log("Length for Side C is missing...");
+                    console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+                    return;
+                }
+            }
+
+            // Determine if the three input lengths consitute a valid triangle
+            if (isTriangle(parseFloat($("#sideA").val()), parseFloat($("#sideB").val()), parseFloat($("#sideC").val())))
+            {
+                var area = triangleArea(parseFloat($("#sideA").val()), parseFloat($("#sideB").val()), parseFloat($("#sideC").val()));
+                output = "<br>A triangle of sides <b>"+$("#sideA").val()+"</b>, <b>"+$("#sideB").val()+"</b> and <b>"+$("#sideC").val()+"</b>";
+                output += " has an area of <b>"+area.toString(10)+"</b>.<br>";
+                $("#c2-Result").append(output);
+                console.log("A triangle of sides "+$("#sideA").val()+", "+$("#sideB").val()+" and "+$("#sideC").val()+" has an area of "+area.toString()+".");
+            }
+            else
+            {
+                $("#c2-Result").append("<br>A triangle of side lengths of <b>"+$("#sideA").val()+"</b>, <b>"+$("#sideB").val()+"</b> and <b>"+$("#sideC").val()+ "</b> does not constitute a valid triangle.");
+                console.log("A triangle of side lengths of "+$("#sideA").val()+", "+$("#sideB").val()+" and "+$("#sideC").val()+ " does not constitute a valid triangle.")
+            }
+
+            console.log(">>>>>>>>>>>>>>> Challenge 2 Output End <<<<<<<<<<<<<<<<<");
+        }
+
+        function challenge3()
+        {
+            console.log(">>>>>>>>>>>>>>> Challenge 3 Output Begin <<<<<<<<<<<<<<<");
+            var errorFound = false;
+            // Reset result-div text
+            $("#c3-Result").html("");
+            var consoleOutput = "";
+
+            // Make sure the inputs are not blank
+            if ($("#firstNum").val() == "" || $("#secondNum").val() == "" || $("#thirdNum").val() == "")
+            {
+                errorFound = true;
+                if ($("#firstNum").val() == "")
+                {
+                    $("#c3-Result").append("First number is empty. ");
+                    consoleOutput += "First number is empty. ";
+                }
+                if ($("#secondNum").val() == "")
+                {
+                    $("#c3-Result").append("Second number is empty. ");
+                    consoleOutput += "Second number is empty. ";
+                }
+                if ($("#thirdNum").val() == "")
+                {
+                    $("#c3-Result").append("Third number is empty. ");
+                    consoleOutput += "Third number is empty. ";
+                }
+            }
+
+            // Make sure valid numbers are input
+            if (isNaN($("#firstNum").val()) || isNaN($("#secondNum").val()) || isNaN($("#thirdNum").val()))
+            {
+                errorFound = true;
+                if (isNaN($("#firstNum").val()))
+                {
+                    $("#c3-Result").append("<b>"+$("#firstNum").val()+"</b> is not a number. ");
+                    consoleOutput += $("#firstNum").val()+" is not a number. ";
+                }
+                if (isNaN($("#secondNum").val()))
+                {
+                    $("#c3-Result").append("<b>"+$("#secondNum").val()+"</b> is not a number. ");
+                    consoleOutput += $("#secondNum").val()+" is not a number. ";
+                }
+                if (isNaN($("#thirdNum").val()))
+                {
+                    $("#c3-Result").append("<b>"+$("#thirdNum").val()+"</b> is not a number. ");
+                    consoleOutput += $("#thirdNum").val()+" is not a number. ";
+                }
+            }
+
+            if (errorFound)
+            {
+                console.log(consoleOutput);
+                console.log(">>>>>>>>>>>>>>> Challenge 3 Output End <<<<<<<<<<<<<<<<<");
+                return;
+            }
+
+            var largest = parseFloat($("#firstNum").val());
+            if (parseFloat($("#secondNum").val()) > largest)
+            {
+                largest = parseFloat($("#secondNum").val());
+            }
+            if (parseFloat($("#thirdNum").val()) > largest)
+            {
+                largest = parseFloat($("#thirdNum").val());
+            }
+
+            $("#c3-Result").append("The largest number between <b>"+$("#firstNum").val()+"</b>, <b>"+$("#secondNum").val()+"</b> and <b>"+$("#thirdNum").val()+"</b> is <b>"+largest+"</b>.");
+            consoleOutput = "The largest number between "+$("#firstNum").val()+", "+$("#secondNum").val()+" and "+$("#thirdNum").val()+" is "+largest+".";
+            console.log(consoleOutput);
+            console.log(">>>>>>>>>>>>>>> Challenge 3 Output End <<<<<<<<<<<<<<<<<");
+        }
+
+        function challenge4()
+        {
+            console.log(">>>>>>>>>>>>>>> Challenge 4 Output Begin <<<<<<<<<<<<<<<");
+            // Make sure the input isn't blank
+            if ($("#numMinutes").val() == "")
+            {
+                $("#c4-Result").html("You didn't type anything in the input field.");
+                console.log("You didn't type anything in the input field.");
+                console.log(">>>>>>>>>>>>>>> Challenge 4 Output End <<<<<<<<<<<<<<<<<");
+                return;
+            }
+
+            // Make sure the input is a valid number
+            if (isNaN($("#numMinutes").val()))
+            {
+                $("#c4-Result").html("<b>"+$("#numMinutes").val()+"</b> is not a valid number.");
+                console.log($("#numMinutes").val()+" is not a valid number.");
+                console.log(">>>>>>>>>>>>>>> Challenge 4 Output End <<<<<<<<<<<<<<<<<");
+                return;
+            }
+
+            // Determine the number of hours
+            var hours = getHours(parseInt($("#numMinutes").val()));
+            // Determine the number of minutes
+            var minutes = getMinutes(parseInt($("#numMinutes").val()));
+            // Prepare div output string
+            var divOutput = "<b>"+$("#numMinutes").val()+"</b> minute"+plural(parseInt($("#numMinutes").val()));
+            divOutput += " is equal to <b>"+hours+"</b> hour"+plural(hours)+" and <b>"+minutes+"</b> minute"+plural(minutes)+".";
+            // Prepare console output string
+            var consoleOutput = $("#numMinutes").val()+" minute"+plural(parseInt($("#numMinutes").val()));
+            consoleOutput += " is equal to "+hours+" hour"+plural(hours)+" and "+minutes+" minute"+plural(minutes)+".";
+
+            // Output to the result div and console
+            console.log(consoleOutput);
+            $("#c4-Result").html(divOutput);
+            console.log(">>>>>>>>>>>>>>> Challenge 4 Output End <<<<<<<<<<<<<<<<<");
+        }
+
+        function getHours(minutes)
+        {
+            return Math.floor(minutes/60);
+        }
+
+        function getMinutes(minutes)
+        {
+            return minutes % 60;
+        }
+
+        function plural(amount)
+        {
+            if (amount == 0 || amount > 1)
+            {
+                return "s";
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        function triangleArea(a, b, c) {
+            var s = .5 * (a + b + c); // First find the semi-perimeter
+            return Math.sqrt((s*(s-a)*(s-b)*(s-c))); // Use Heron's formula to determine the area
+        }
+
+        function isTriangle(a, b, c) {
+            // This function uses the Triangle Inequality Theorem to determine if a triangle is valid
+            if ((a + b > c) && (a + c > b) && (b + c > a))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>JavaScript Challenge</h1>
+        <hr>
+        <h4>Challenge #1</h4>
+        <p>The following JavaScript program checks two numbers and returns true if one of the numbers is 75 or if their sum is 75.</p>
+        <input type="text" id="num1" placeholder="Enter #1 here">
+        <input type="text" id="num2" placeholder="Enter #2 here">
+        <button onclick="challenge1()">Test Condition</button>
+        <div id="c1-Result"></div>
+        <hr>
+
+        <h4>Challenge #2</h4>
+        <p>The following JavaScript program will:
+            <ol>
+                <li>return the area of a triangle where the lengths of its three sides are 6, 7, 8.</li>
+                <li>take input for three sides and determine if they constitute a triangle, and...</li>
+                <li>... if those three sides constitute a triangle, give the area of the triangle.</li>
+            </ol>
+        </p>
+        <input type="text" id="sideA" placeholder="Enter Side A">
+        <input type="text" id="sideB" placeholder="Enter Side B">
+        <input type="text" id="sideC" placeholder="Enter Side C">
+        <button onclick="challenge2()">Calculate Area</button>
+        <div id="c2-Result"></div>
+        <hr>
+
+        <h4>Challenge #3</h4>
+        <p>This JavaScript program will return the largest of three input numbers.</p>
+        <input type="text" id="firstNum" placeholder="First number">
+        <input type="text" id="secondNum" placeholder="Second number">
+        <input type="text" id="thirdNum" placeholder="Third number">
+        <button onclick="challenge3()">Show Largest</button>
+        <div id="c3-Result"></div>
+        <hr>
+
+        <h4>Challenge #4</h4>
+        <p>This JavaScript program will convert any number <b>of minutes</b> into hours and minutes.</p>
+        <input type="text" id="numMinutes" placeholder="First number">
+        <button onclick="challenge4()">Show Time</button>
+        <div id="c4-Result"></div>
+        <hr>
+    </div>
+</body>
+<html>
